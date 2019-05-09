@@ -29,41 +29,45 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbResult = new System.Windows.Forms.TextBox();
+            this.lbAscii85 = new System.Windows.Forms.Label();
+            this.tbAscii85 = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.tbCom = new System.Windows.Forms.TextBox();
             this.btnToggle = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tbLength = new System.Windows.Forms.TrackBar();
             this.lbLength = new System.Windows.Forms.Label();
+            this.tbBase62 = new System.Windows.Forms.TextBox();
+            this.lb = new System.Windows.Forms.Label();
+            this.tbHex = new System.Windows.Forms.TextBox();
+            this.lbHex = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbLength)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lbAscii85
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 19);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "PASS";
+            this.lbAscii85.AutoSize = true;
+            this.lbAscii85.Location = new System.Drawing.Point(10, 83);
+            this.lbAscii85.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbAscii85.Name = "lbAscii85";
+            this.lbAscii85.Size = new System.Drawing.Size(50, 15);
+            this.lbAscii85.TabIndex = 0;
+            this.lbAscii85.Text = "Ascii85";
             // 
-            // tbResult
+            // tbAscii85
             // 
-            this.tbResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAscii85.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbResult.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbResult.Location = new System.Drawing.Point(68, 15);
-            this.tbResult.Margin = new System.Windows.Forms.Padding(4);
-            this.tbResult.Name = "tbResult";
-            this.tbResult.Size = new System.Drawing.Size(980, 25);
-            this.tbResult.TabIndex = 1;
+            this.tbAscii85.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAscii85.Location = new System.Drawing.Point(63, 79);
+            this.tbAscii85.Margin = new System.Windows.Forms.Padding(4);
+            this.tbAscii85.Name = "tbAscii85";
+            this.tbAscii85.Size = new System.Drawing.Size(980, 25);
+            this.tbAscii85.TabIndex = 1;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(159, 50);
+            this.btnConnect.Location = new System.Drawing.Point(154, 114);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(100, 29);
@@ -74,7 +78,7 @@
             // 
             // tbCom
             // 
-            this.tbCom.Location = new System.Drawing.Point(17, 50);
+            this.tbCom.Location = new System.Drawing.Point(12, 114);
             this.tbCom.Margin = new System.Windows.Forms.Padding(4);
             this.tbCom.Name = "tbCom";
             this.tbCom.Size = new System.Drawing.Size(132, 25);
@@ -83,7 +87,7 @@
             // 
             // btnToggle
             // 
-            this.btnToggle.Location = new System.Drawing.Point(267, 50);
+            this.btnToggle.Location = new System.Drawing.Point(262, 114);
             this.btnToggle.Margin = new System.Windows.Forms.Padding(4);
             this.btnToggle.Name = "btnToggle";
             this.btnToggle.Size = new System.Drawing.Size(100, 29);
@@ -98,15 +102,14 @@
             // 
             // tbLength
             // 
-            this.tbLength.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLength.Location = new System.Drawing.Point(413, 50);
+            this.tbLength.Location = new System.Drawing.Point(408, 114);
             this.tbLength.Margin = new System.Windows.Forms.Padding(4);
             this.tbLength.Maximum = 100;
             this.tbLength.Minimum = 1;
             this.tbLength.Name = "tbLength";
-            this.tbLength.Size = new System.Drawing.Size(636, 56);
+            this.tbLength.Size = new System.Drawing.Size(635, 56);
             this.tbLength.TabIndex = 5;
             this.tbLength.Value = 100;
             this.tbLength.Scroll += new System.EventHandler(this.TbLength_Scroll);
@@ -114,25 +117,71 @@
             // lbLength
             // 
             this.lbLength.AutoSize = true;
-            this.lbLength.Location = new System.Drawing.Point(375, 62);
+            this.lbLength.Location = new System.Drawing.Point(370, 126);
             this.lbLength.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLength.Name = "lbLength";
             this.lbLength.Size = new System.Drawing.Size(28, 15);
             this.lbLength.TabIndex = 6;
             this.lbLength.Text = "100";
             // 
+            // tbBase62
+            // 
+            this.tbBase62.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbBase62.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBase62.Location = new System.Drawing.Point(63, 46);
+            this.tbBase62.Margin = new System.Windows.Forms.Padding(4);
+            this.tbBase62.Name = "tbBase62";
+            this.tbBase62.Size = new System.Drawing.Size(980, 25);
+            this.tbBase62.TabIndex = 8;
+            // 
+            // lb
+            // 
+            this.lb.AutoSize = true;
+            this.lb.Location = new System.Drawing.Point(10, 50);
+            this.lb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb.Name = "lb";
+            this.lb.Size = new System.Drawing.Size(47, 15);
+            this.lb.TabIndex = 7;
+            this.lb.Text = "Base62";
+            // 
+            // tbHex
+            // 
+            this.tbHex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbHex.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbHex.Location = new System.Drawing.Point(63, 13);
+            this.tbHex.Margin = new System.Windows.Forms.Padding(4);
+            this.tbHex.Name = "tbHex";
+            this.tbHex.Size = new System.Drawing.Size(980, 25);
+            this.tbHex.TabIndex = 10;
+            // 
+            // lbHex
+            // 
+            this.lbHex.AutoSize = true;
+            this.lbHex.Location = new System.Drawing.Point(10, 17);
+            this.lbHex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbHex.Name = "lbHex";
+            this.lbHex.Size = new System.Drawing.Size(36, 15);
+            this.lbHex.TabIndex = 9;
+            this.lbHex.Text = "HEX";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 105);
+            this.ClientSize = new System.Drawing.Size(1065, 167);
+            this.Controls.Add(this.tbHex);
+            this.Controls.Add(this.lbHex);
+            this.Controls.Add(this.tbBase62);
+            this.Controls.Add(this.lb);
             this.Controls.Add(this.lbLength);
             this.Controls.Add(this.tbLength);
             this.Controls.Add(this.btnToggle);
             this.Controls.Add(this.tbCom);
             this.Controls.Add(this.btnConnect);
-            this.Controls.Add(this.tbResult);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbAscii85);
+            this.Controls.Add(this.lbAscii85);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Neug Password Generator";
@@ -146,14 +195,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbResult;
+        private System.Windows.Forms.Label lbAscii85;
+        private System.Windows.Forms.TextBox tbAscii85;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox tbCom;
         private System.Windows.Forms.Button btnToggle;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TrackBar tbLength;
         private System.Windows.Forms.Label lbLength;
+        private System.Windows.Forms.TextBox tbBase62;
+        private System.Windows.Forms.Label lb;
+        private System.Windows.Forms.TextBox tbHex;
+        private System.Windows.Forms.Label lbHex;
     }
 }
 

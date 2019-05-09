@@ -47,14 +47,12 @@ namespace NeugPasswordGenerator
             timer1.Enabled = !timer1.Enabled;
         }
 
-        Ascii85 ascii85 = new Ascii85()
-        {
-            PrefixMark = "",
-            SuffixMark = ""
-        };
+        Ascii85 ascii85 = new Ascii85();
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            tbResult.Text = ascii85.Encode(buffer).Substring(0, length);
+            tbHex.Text = Hex.ToHex(buffer).Substring(0, length);
+            tbBase62.Text = Base62.ToBase62(buffer).Substring(0, length);
+            tbAscii85.Text = ascii85.Encode(buffer).Substring(0, length);
         }
 
         private void TbLength_Scroll(object sender, EventArgs e)
