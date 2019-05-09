@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NeugPasswordGenerator
@@ -32,9 +33,13 @@ namespace NeugPasswordGenerator
         byte[] buffer = new byte[80];
         private void Sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            int len = 80;
-            while (len == 80)
-                len = sp.Read(buffer, 0, 80);
+            try
+            {
+                int len = 80;
+                while (len == 80)
+                    len = sp.Read(buffer, 0, 80);
+            }
+            catch { }
         }
 
         private void BtnToggle_Click(object sender, EventArgs e)
@@ -56,6 +61,25 @@ namespace NeugPasswordGenerator
         {
             length = tbLength.Value;
             lbLength.Text = length.ToString();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var linq = from c in Win32DeviceMgmt.GetAllCOMPorts()
+                       where c.bus_description == "NeuG True RNG"
+                       select c.name;
+            var result = linq.FirstOrDefault();
+            if (result != null)
+            {
+                tbCom.Text = result;
+                BtnConnect_Click(sender, e);
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sp?.Dispose();
+            sp = null;
         }
     }
 }
