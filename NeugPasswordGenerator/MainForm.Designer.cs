@@ -182,7 +182,9 @@
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.tbAscii85);
             this.Controls.Add(this.lbAscii85);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Neug Password Generator";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
