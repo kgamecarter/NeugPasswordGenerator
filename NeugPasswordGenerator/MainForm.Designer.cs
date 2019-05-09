@@ -35,6 +35,9 @@
             this.tbCom = new System.Windows.Forms.TextBox();
             this.btnToggle = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tbLength = new System.Windows.Forms.TrackBar();
+            this.lbLength = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLength)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -88,11 +91,36 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
+            // tbLength
+            // 
+            this.tbLength.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbLength.Location = new System.Drawing.Point(310, 40);
+            this.tbLength.Maximum = 100;
+            this.tbLength.Minimum = 1;
+            this.tbLength.Name = "tbLength";
+            this.tbLength.Size = new System.Drawing.Size(477, 45);
+            this.tbLength.TabIndex = 5;
+            this.tbLength.Value = 100;
+            this.tbLength.Scroll += new System.EventHandler(this.TbLength_Scroll);
+            // 
+            // lbLength
+            // 
+            this.lbLength.AutoSize = true;
+            this.lbLength.Location = new System.Drawing.Point(281, 50);
+            this.lbLength.Name = "lbLength";
+            this.lbLength.Size = new System.Drawing.Size(23, 12);
+            this.lbLength.TabIndex = 6;
+            this.lbLength.Text = "100";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 84);
+            this.Controls.Add(this.lbLength);
+            this.Controls.Add(this.tbLength);
             this.Controls.Add(this.btnToggle);
             this.Controls.Add(this.tbCom);
             this.Controls.Add(this.btnConnect);
@@ -100,7 +128,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MainForm";
             this.Text = "Neug Password Generator";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.tbLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +142,8 @@
         private System.Windows.Forms.TextBox tbCom;
         private System.Windows.Forms.Button btnToggle;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TrackBar tbLength;
+        private System.Windows.Forms.Label lbLength;
     }
 }
 

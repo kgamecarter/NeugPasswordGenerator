@@ -28,6 +28,7 @@ namespace NeugPasswordGenerator
             timer1.Enabled = true;
         }
 
+        int length = 100;
         byte[] buffer = new byte[80];
         private void Sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -48,12 +49,13 @@ namespace NeugPasswordGenerator
         };
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            tbResult.Text = ascii85.Encode(buffer);
+            tbResult.Text = ascii85.Encode(buffer).Substring(0, length);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void TbLength_Scroll(object sender, EventArgs e)
         {
-            // BtnConnect_Click(sender, e);
+            length = tbLength.Value;
+            lbLength.Text = length.ToString();
         }
     }
 }
