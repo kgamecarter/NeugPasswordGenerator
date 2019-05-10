@@ -30,14 +30,14 @@ namespace NeugPasswordGenerator
         }
 
         int length = 100;
-        byte[] buffer = new byte[80];
+        byte[] buffer = new byte[960];
         private void Sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
             {
-                int len = 80;
-                while (len == 80)
-                    len = sp.Read(buffer, 0, 80);
+                int len = buffer.Length;
+                while (len == buffer.Length)
+                    len = sp.Read(buffer, 0, buffer.Length);
             }
             catch { }
         }
@@ -50,9 +50,10 @@ namespace NeugPasswordGenerator
         Ascii85 ascii85 = new Ascii85();
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            tbHex.Text = Hex.ToHex(buffer).Substring(0, length);
-            tbBase62.Text = Base62.ToBase62(buffer).Substring(0, length);
-            tbAscii85.Text = ascii85.Encode(buffer).Substring(0, length);
+            var v80bytes = buffer.Take(80).ToArray();
+            tbHex.Text = Hex.ToHex(v80bytes).Substring(0, length);
+            tbBase62.Text = Base62.ToBase62(v80bytes).Substring(0, length);
+            tbAscii85.Text = ascii85.Encode(v80bytes).Substring(0, length);
         }
 
         private void TbLength_Scroll(object sender, EventArgs e)
