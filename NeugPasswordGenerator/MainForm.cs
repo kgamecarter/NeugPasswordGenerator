@@ -48,12 +48,20 @@ namespace NeugPasswordGenerator
         }
 
         Ascii85 ascii85 = new Ascii85();
+        const int PickLength = 100;
+        byte[] vHex = new byte[PickLength];
+        byte[] vBase62 = new byte[PickLength];
+        byte[] vAscii85 = new byte[PickLength];
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            var v80bytes = buffer.Take(80).ToArray();
-            tbHex.Text = Hex.ToHex(v80bytes).Substring(0, length);
-            tbBase62.Text = Base62.ToBase62(v80bytes).Substring(0, length);
-            tbAscii85.Text = ascii85.Encode(v80bytes).Substring(0, length);
+            Array.Copy(buffer, 0, vHex, 0, PickLength);
+            if (vHex.All(v => v == 0))
+                return;
+            Array.Copy(buffer, PickLength, vBase62, 0, PickLength);
+            Array.Copy(buffer, PickLength * 2, vAscii85, 0, PickLength);
+            tbHex.Text = Hex.ToHex(vHex).Substring(0, length);
+            tbBase62.Text = Base62.ToBase62(vBase62).Substring(0, length);
+            tbAscii85.Text = ascii85.Encode(vAscii85).Substring(0, length);
         }
 
         private void TbLength_Scroll(object sender, EventArgs e)
