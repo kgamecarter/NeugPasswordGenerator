@@ -11,8 +11,7 @@ namespace NeugPasswordGenerator
         public static string ToHex(byte[] data)
         {
             return data
-                .Select(b => b.ToString("X2"))
-                .Aggregate(new StringBuilder(), (sb, v) => sb.Append(v))
+                .Aggregate(new StringBuilder(data.Length * 2), (sb, v) => sb.Append(v.ToString("X2")))
                 .ToString();
         }
     }
