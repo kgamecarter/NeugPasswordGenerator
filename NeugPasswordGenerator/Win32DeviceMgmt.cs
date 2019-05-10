@@ -297,9 +297,9 @@ namespace NeugPasswordGenerator
 
         public struct DeviceInfo
         {
-            public string name;
-            public string description;
-            public string bus_description;
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string BusDescription { get; set; }
         }
 
         static DEVPROPKEY DEVPKEY_Device_BusReportedDeviceDesc;
@@ -338,9 +338,9 @@ namespace NeugPasswordGenerator
                             }
 
                             DeviceInfo deviceInfo = new DeviceInfo();
-                            deviceInfo.name = GetDeviceName(hDeviceInfoSet, deviceInfoData);
-                            deviceInfo.description = GetDeviceDescription(hDeviceInfoSet, deviceInfoData);
-                            deviceInfo.bus_description = GetDeviceBusDescription(hDeviceInfoSet, deviceInfoData);
+                            deviceInfo.Name = GetDeviceName(hDeviceInfoSet, deviceInfoData);
+                            deviceInfo.Description = GetDeviceDescription(hDeviceInfoSet, deviceInfoData);
+                            deviceInfo.BusDescription = GetDeviceBusDescription(hDeviceInfoSet, deviceInfoData);
                             devices.Add(deviceInfo);
 
                             iMemberIndex++;

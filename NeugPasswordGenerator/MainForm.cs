@@ -7,6 +7,8 @@ namespace NeugPasswordGenerator
 {
     public partial class MainForm : Form
     {
+        const string NeugBusDescription = "NeuG True RNG";
+
         SerialPort sp;
         public MainForm()
         {
@@ -39,7 +41,17 @@ namespace NeugPasswordGenerator
                 while (len == buffer.Length)
                     len = sp.Read(buffer, 0, buffer.Length);
             }
-            catch { }
+            catch
+            {
+                sp?.Dispose();
+                sp = null;
+                BeginInvoke(new Action(() =>
+                {
+                    btnConnect.Enabled = true;
+                    tbCom.Enabled = true;
+                    timer1.Enabled = false;
+                }));
+            }
         }
 
         private void BtnToggle_Click(object sender, EventArgs e)
@@ -73,8 +85,8 @@ namespace NeugPasswordGenerator
         private void MainForm_Load(object sender, EventArgs e)
         {
             var linq = from c in Win32DeviceMgmt.GetAllCOMPorts()
-                       where c.bus_description == "NeuG True RNG"
-                       select c.name;
+                       where c.BusDescription == NeugBusDescription
+                       select c.Name;
             var result = linq.FirstOrDefault();
             if (result != null)
             {
