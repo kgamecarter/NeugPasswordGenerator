@@ -51,12 +51,19 @@ namespace NeugPasswordGenerator
                     tbCom.Enabled = true;
                     timer1.Enabled = false;
                 }));
+                Array.Clear(buffer, 0, buffer.Length);
             }
         }
 
         private void BtnToggle_Click(object sender, EventArgs e)
         {
             timer1.Enabled = !timer1.Enabled;
+            if (!timer1.Enabled)
+            {
+                Array.Clear(vHex, 0, vHex.Length);
+                Array.Clear(vBase62, 0, vBase62.Length);
+                Array.Clear(vAscii85, 0, vAscii85.Length);
+            }
         }
 
         Ascii85 ascii85 = new Ascii85();
