@@ -8,11 +8,12 @@ namespace NeugPasswordGenerator
 {
     public static class Hex
     {
-        public static string ToHex(byte[] data)
+        public static string ToHex(ReadOnlySpan<byte> data)
         {
-            return data
-                .Aggregate(new StringBuilder(data.Length * 2), (sb, v) => sb.Append(v.ToString("X2")))
-                .ToString();
+            var sb = new StringBuilder(data.Length * 2);
+            foreach (var b in data)
+                sb.Append(b.ToString("X2"));
+            return sb.ToString();
         }
     }
 }

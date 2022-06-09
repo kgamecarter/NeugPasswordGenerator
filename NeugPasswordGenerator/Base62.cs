@@ -16,32 +16,29 @@ namespace NeugPasswordGenerator
         /// <param name="original">Byte array</param>
         /// <param name="inverted">Use inverted character set</param>
         /// <returns>Base62 string</returns>
-        public static string ToBase62(byte[] original)
+        public static string ToBase62(ReadOnlySpan<byte> original)
         {
-            var arr = Array.ConvertAll(original, t => (int)t);
-
-            var converted = BaseConvert(arr, 256, 62);
+            var converted = BaseConvert(original, 256, 62);
             var builder = new StringBuilder();
             foreach (var t in converted)
                 builder.Append(CharacterSet[t]);
             return builder.ToString();
         }
 
-        private static int[] BaseConvert(int[] source, int sourceBase, int targetBase)
+        private static byte[] BaseConvert(ReadOnlySpan<byte> source, int sourceBase, int targetBase)
         {
             var result = new List<int>();
-            var leadingZeroCount = source.TakeWhile(x => x == 0).Count();
             int count;
             while ((count = source.Length) > 0)
             {
-                var quotient = new List<int>();
-                var remainder = 0;
+                var quotient = new List<byte>();
+                int remainder = 0;
                 for (var i = 0; i != count; i++)
                 {
-                    var accumulator = source[i] + remainder * sourceBase;
-                    var digit = accumulator / targetBase;
+                    int accumulator = source[i] + remainder * sourceBase;
+                    byte digit = (byte)((accumulator - (accumulator % targetBase)) / targetBase);
                     remainder = accumulator % targetBase;
-                    if (quotient.Count > 0 || digit > 0)
+                    if (quotient.Count > 0 || digit != 0)
                     {
                         quotient.Add(digit);
                     }
@@ -50,8 +47,12 @@ namespace NeugPasswordGenerator
                 result.Insert(0, remainder);
                 source = quotient.ToArray();
             }
-            result.InsertRange(0, Enumerable.Repeat(0, leadingZeroCount));
-            return result.ToArray();
+
+            var output = new byte[result.Count];
+            for (int i = 0; i < result.Count; i++)
+                output[i] = (byte)result[i];
+
+            return output;
         }
     }
 }

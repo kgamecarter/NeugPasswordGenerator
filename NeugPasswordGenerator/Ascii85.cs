@@ -21,7 +21,7 @@ namespace NeugPasswordGenerator
         /// </summary>
         /// <param name="ba">binary data to encode</param>
         /// <returns>ASCII85 encoded string</returns>
-        public string Encode(byte[] ba)
+        public string Encode(ReadOnlySpan<byte> ba)
         {
             StringBuilder sb = new StringBuilder((int)(ba.Length * (_encodedBlock.Length / _decodedBlock.Length)));
             

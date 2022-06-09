@@ -13,6 +13,12 @@ namespace NeugPasswordGenerator
         public MainForm()
         {
             InitializeComponent();
+            var offset = 0;
+            vHex = new ReadOnlyMemory<byte>(buffer, offset, PickLength);
+            offset += PickLength;
+            vBase62 = new ReadOnlyMemory<byte>(buffer, offset, PickLength);
+            offset += PickLength;
+            vAscii85 = new ReadOnlyMemory<byte>(buffer, offset, PickLength); 
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -31,7 +37,7 @@ namespace NeugPasswordGenerator
             timer1.Enabled = true;
         }
 
-        int length = 100;
+        int length = 150;
         byte[] buffer = new byte[960];
         private void Sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -60,27 +66,18 @@ namespace NeugPasswordGenerator
             timer1.Enabled = !timer1.Enabled;
             if (!timer1.Enabled)
             {
-                Array.Clear(vHex, 0, vHex.Length);
-                Array.Clear(vBase62, 0, vBase62.Length);
-                Array.Clear(vAscii85, 0, vAscii85.Length);
+                Array.Clear(buffer, 0, buffer.Length);
             }
         }
 
         Ascii85 ascii85 = new Ascii85();
-        const int PickLength = 100;
-        byte[] vHex = new byte[PickLength];
-        byte[] vBase62 = new byte[PickLength];
-        byte[] vAscii85 = new byte[PickLength];
+        const int PickLength = 150;
+        ReadOnlyMemory<byte> vHex, vBase62, vAscii85;
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            Array.Copy(buffer, 0, vHex, 0, PickLength);
-            if (vHex.All(v => v == 0))
-                return;
-            Array.Copy(buffer, PickLength, vBase62, 0, PickLength);
-            Array.Copy(buffer, PickLength * 2, vAscii85, 0, PickLength);
-            tbHex.Text = Hex.ToHex(vHex).Substring(0, length);
-            tbBase62.Text = Base62.ToBase62(vBase62).Substring(0, length);
-            tbAscii85.Text = ascii85.Encode(vAscii85).Substring(0, length);
+            tbHex.Text = Hex.ToHex(vHex.Span).Substring(0, length);
+            tbBase62.Text = Base62.ToBase62(vBase62.Span).Substring(0, length);
+            tbAscii85.Text = ascii85.Encode(vAscii85.Span).Substring(0, length);
         }
 
         private void TbLength_Scroll(object sender, EventArgs e)
